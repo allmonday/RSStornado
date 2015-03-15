@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ _('login in') }}</title>
+</head>
+<body>
+	<h1>{{ _('have account') }}</h1>
+	<form action="/login" method="post">
+		{% raw xsrf_form_html() %}
+		{{ _('Username') }}: <input type="text" name="username"/>
+		{{ _('password') }}: <input type="text" name="password"/>
+		<input type="submit" value={{_("login")}}>
+	</form>	
+	<p>{{ _(message) }}</p>
+
+	<h2><a href="/register">{{ _('new user') }}</a></h2>
+
+</body>
+</html>

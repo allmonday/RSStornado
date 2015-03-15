@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ _('register') }}</title>
+</head>
+<body>
+	<form action="/register" method="post">
+		{% raw xsrf_form_html() %}
+		{{ _('Username') }}: <input type="text" name="username"/><br/>
+		{{ _('password') }}: <input type="text" name="password"/><br/>
+		<p>请选择语言</p>
+		中文<input type="radio" checked="checked" name="locale" value="zh_ZH">
+		英语<input type="radio" checked="checked" name="locale" value="en_US">
+		<input type="submit" value={{ _("register") }}>
+	</form>
+	
+</body>
+</html>
