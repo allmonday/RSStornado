@@ -12,7 +12,6 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def get_user_locale(self):
     	cuser = self.current_user or {}
-        logger.info(cuser)
     	user_locale = cuser.get('locale', 'zh_ZH')
         return tornado.locale.get(user_locale)
 

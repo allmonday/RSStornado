@@ -20,7 +20,7 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, routers, **settings)
         self.mongo_test = MongoClient(options.mongo_host)[options.mongo_test]
         self.settings = settings
-
+        
 
 def main():
     tornado.options.parse_command_line()
