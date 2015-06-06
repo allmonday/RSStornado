@@ -1,5 +1,3 @@
-#coding: utf-8
-
 import urllib
 import tornado.web
 import tornado.ioloop
@@ -8,9 +6,6 @@ from tornado import gen
 
 
 class MainHandler(tornado.web.RequestHandler):
-    """
-    测试gen.coroutine
-    """
 
     @gen.coroutine
     def get(self):
@@ -20,18 +15,16 @@ class MainHandler(tornado.web.RequestHandler):
 
     @gen.coroutine
     def post(self):
-        body = self.request.body
-        print body
-        data = yield self.das_post(body)
+        data = yield self.das_post(self.request.headers, self.request.body)
         self.write(data.body)
 
     def das_get(self):
         http_client = tornado.httpclient.AsyncHTTPClient()
         return http_client.fetch("http://0.0.0.0:8888/api/blog")
 
-    def das_post(self, body):
+    def das_post(self, headers, body):
         http_client = tornado.httpclient.AsyncHTTPClient()
-        return http_client.fetch("http://0.0.0.0:8888/api/blog", method="POST", headers=None, body=body)
+        return http_client.fetch("http://0.0.0.0:8888/api/blog", method="POST", headers=headers, body=body)
 
 
 application = tornado.web.Application([

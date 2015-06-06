@@ -3,7 +3,7 @@ import tornado
 import tornado.web
 
 from utils import _hash
-from base import BaseHandler
+from handlers.base import BaseHandler
 
 logger = logging.getLogger(__name__)
 

@@ -1,10 +1,12 @@
 import logging
 import tornado.web
 
+from handlers.base import BaseHandler
+
 logger = logging.getLogger(__name__)
 
 
-class BlogHandler(tornado.web.RequestHandler):
+class BlogHandler(BaseHandler):
 
     def get(self):
         logger.debug("get blog")
@@ -18,7 +20,7 @@ class BlogHandler(tornado.web.RequestHandler):
             })
 
     def post(self):
-        print self.request.body
+        print self.json_args
         self.write({
             "status": 0,
             "message": "ok"
