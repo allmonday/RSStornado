@@ -6,6 +6,9 @@ from tornado import gen
 
 
 class MainHandler(tornado.web.RequestHandler):
+    """
+    通过异步调用后端服务器的数据, 防止阻塞
+    """
 
     @gen.coroutine
     def get(self):
