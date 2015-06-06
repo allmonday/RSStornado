@@ -11,7 +11,7 @@ define('translation_path', default=os.path.join(BASE_PATH, 'translates'))
 settings = {
     'template_path': os.path.join(os.path.dirname(__file__), 'templates'),
     'cookie_secret': 'bZJc2sWbQLKos6GkHn/VB9oXwQt8S0R0kRvJ5/xJ89E=',
-    'xsrf_cookies': True,
+    # 'xsrf_cookies': True,
     'login_url': '/login',
     'debug': True
 }

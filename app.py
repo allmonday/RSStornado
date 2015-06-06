@@ -12,7 +12,12 @@ from route import routers
 from settings import settings
 
 logger = logging.getLogger(__name__)
-
+logger.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+logger.addHandler(ch)
 
 class Application(tornado.web.Application):
 
@@ -20,7 +25,7 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, routers, **settings)
         self.mongo_test = MongoClient(options.mongo_host)[options.mongo_test]
         self.settings = settings
-        
+
 
 def main():
     tornado.options.parse_command_line()
@@ -30,4 +35,5 @@ def main():
     tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":
+    logger.debug("starting on port: {}".format(options.port))
     main()

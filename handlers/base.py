@@ -19,3 +19,10 @@ class BaseHandler(tornado.web.RequestHandler):
         username = self.get_secure_cookie('username')
         result = self.mongo_test.tornado.find_one({'username': username})
     	return result
+
+    def prepare(self):
+        if self.request.headers.get(
+                "Content-Type", "").startswith("application/json"):
+            self.json_args = json.loads(self.request.body)
+        else:
+            self.json_args = None
