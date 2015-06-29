@@ -1,5 +1,6 @@
 # coding: utf-8
 import urllib
+import requests
 import tornado.web
 import tornado.ioloop
 import tornado.httpclient
@@ -10,7 +11,6 @@ class MainHandler(tornado.web.RequestHandler):
     """
     通过异步调用后端服务器的数据, 防止阻塞
     """
-
     # @gen.coroutine
     # def get(self):
     #     data = yield self.das_get()
@@ -30,7 +30,6 @@ class MainHandler(tornado.web.RequestHandler):
     #     http_client = tornado.httpclient.AsyncHTTPClient()
     #     return http_client.fetch("http://0.0.0.0:8888/api/blog", method="POST", headers=headers, body=body)
 
-    # why don't work??
     @gen.coroutine
     def get(self):
         data = yield self.das_get()
@@ -44,8 +43,20 @@ class MainHandler(tornado.web.RequestHandler):
         raise gen.Return(data.body)
 
 
+class AHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        data = self.das_get()
+        print data
+        self.write(data)
+
+    def das_get(self):
+        return requests.get('http://0.0.0.0:8888/api/blog').json()
+
+
 application = tornado.web.Application([
     (r"/", MainHandler),
+    (r"/a", AHandler),
 ], debug=True)
 
 if __name__ == "__main__":
