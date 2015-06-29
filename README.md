@@ -1,4 +1,4 @@
-# RSStornado
+# practice-with-tornado
 学习tornado 开发
 
 tornado step by step
@@ -11,8 +11,7 @@ tornado step by step
 - orm
 - integrated with angularjs
 
-## handlers
 
-## todo
+## example
 
-前端设置nginx 代理静态资源
+- gen.coroutine
