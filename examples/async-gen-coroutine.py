@@ -11,24 +11,37 @@ class MainHandler(tornado.web.RequestHandler):
     通过异步调用后端服务器的数据, 防止阻塞
     """
 
+    # @gen.coroutine
+    # def get(self):
+    #     data = yield self.das_get()
+    #     print data.body
+    #     self.write(data.body)
+
+    # @gen.coroutine
+    # def post(self):
+    #     data = yield self.das_post(self.request.headers, self.request.body)
+    #     self.write(data.body)
+
+    # def das_get(self):
+    #     http_client = tornado.httpclient.AsyncHTTPClient()
+    #     return http_client.fetch("http://0.0.0.0:8888/api/blog")
+
+    # def das_post(self, headers, body):
+    #     http_client = tornado.httpclient.AsyncHTTPClient()
+    #     return http_client.fetch("http://0.0.0.0:8888/api/blog", method="POST", headers=headers, body=body)
+
+    # why don't work??
     @gen.coroutine
     def get(self):
         data = yield self.das_get()
-        print data.body
-        self.write(data.body)
+        self.write(data)
 
     @gen.coroutine
-    def post(self):
-        data = yield self.das_post(self.request.headers, self.request.body)
-        self.write(data.body)
-
     def das_get(self):
         http_client = tornado.httpclient.AsyncHTTPClient()
-        return http_client.fetch("http://0.0.0.0:8888/api/blog")
-
-    def das_post(self, headers, body):
-        http_client = tornado.httpclient.AsyncHTTPClient()
-        return http_client.fetch("http://0.0.0.0:8888/api/blog", method="POST", headers=headers, body=body)
+        data = yield http_client.fetch("http://0.0.0.0:8888/api/blog")
+        print data.body
+        raise gen.Return(data.body)
 
 
 application = tornado.web.Application([

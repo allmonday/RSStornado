@@ -13,3 +13,6 @@ tornado step by step
 
 ## handlers
 
+## todo
+
+前端设置nginx 代理静态资源
