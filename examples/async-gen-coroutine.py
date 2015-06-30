@@ -9,7 +9,7 @@ from tornado import gen
 
 class MainHandler(tornado.web.RequestHandler):
     """
-    通过异步调用后端服务器的数据, 防止阻塞
+    异步机制在loadrunner测试下, 10个并发, 2分钟: 57次响应每秒
     """
     # @gen.coroutine
     # def get(self):
@@ -44,7 +44,9 @@ class MainHandler(tornado.web.RequestHandler):
 
 
 class AHandler(tornado.web.RequestHandler):
-
+    """
+    同步机制在loadrunner测试下, 10个并发, 2分钟: 20次响应每秒
+    """
     def get(self):
         data = self.das_get()
         print data
